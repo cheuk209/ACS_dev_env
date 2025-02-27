@@ -1,3 +1,18 @@
+#!/bin/bash
+
+# Create subdirectories with numbering directly in the root directory
+mkdir -p 1_Journey
+mkdir -p 2_Resources/Data
+mkdir -p 2_Resources/Scripts
+mkdir -p 2_Resources/Documentation
+mkdir -p 3_Encounters/Errors
+mkdir -p 3_Encounters/Debugging
+mkdir -p 3_Encounters/Lessons_Learned
+mkdir -p 4_Milestones/Screenshots
+mkdir -p 4_Milestones/Descriptions
+
+# Create README.md with sections in the root directory
+cat <<EOL > README.md
 # GalacticAcademy
 
 ## 1. Journey 🌌
@@ -35,3 +50,6 @@ Visual captures of key moments.
 
 ### Descriptions
 Brief explanations of what each screenshot represents.
+EOL
+
+echo "Directory structure created successfully!"
