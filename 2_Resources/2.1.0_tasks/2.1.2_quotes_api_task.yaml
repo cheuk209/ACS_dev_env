@@ -1,0 +1,11 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: motivational-quote-task
+spec:
+  steps:
+    - name: quote
+      image: curlimages/curl:latest
+      script: |
+        apk add --no-cache jq
+        curl -s https://v1.hitokoto.cn/?c=i | jq '.hitokoto'
