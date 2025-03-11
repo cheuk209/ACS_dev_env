@@ -1,8 +1,10 @@
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
-  name: motivational-quote-task
+  name: hello-world-task
 spec:
+  description: |
+    A simple task that echoes "Hello World" to demonstrate how Tekton Tasks work.
   steps:
     - name: say-hello
       image: registry.access.redhat.com/ubi8/ubi-minimal:latest
@@ -10,11 +12,3 @@ spec:
         #!/bin/sh
         echo "Hello World!"
         echo "This is my first Tekton Task step!"
-
-    - name: quote
-      image: curlimages/curl:latest
-      script: |
-        apk add --no-cache jq
-        curl -s https://v1.hitokoto.cn/?c=i | jq '.hitokoto'
-      securityContext:
-        runAsUser: 0
