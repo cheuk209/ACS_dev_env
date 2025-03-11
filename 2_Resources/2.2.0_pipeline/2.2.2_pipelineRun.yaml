@@ -1,0 +1,7 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: daily-info-run
+spec:
+  pipelineRef:
+    name: daily-info-pipeline

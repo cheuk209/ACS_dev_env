@@ -1,0 +1,22 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: fetch-weather-task
+spec:
+  results:
+    - name: weather
+      description: The weather information
+      type: string
+  description: |
+    A simple task that fetches the weather for a given city.
+  params:
+    - name: location
+      default: "London"
+  steps:
+    - name: fetch-weather
+      image: registry.access.redhat.com/ubi8/ubi-minimal:latest
+      script: |
+        #!/bin/sh
+        echo "Fetching weather for $(params.location)..."
+        weather_data=$(curl -s "https://wttr.in/$(params.location)?format=3")
+        echo "$weather_data" > $(results.weather.path)

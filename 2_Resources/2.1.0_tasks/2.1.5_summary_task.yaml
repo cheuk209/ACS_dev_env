@@ -1,0 +1,34 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: create-summary
+spec:
+  description: |
+    Combines the outputs from other tasks into a summary report
+  params:
+    - name: quote
+      description: The motivational quote
+      type: string
+    - name: weather
+      description: The weather information
+      type: string
+  workspaces:
+    - name: output
+      description: Workspace to store the summary report
+  steps:
+    - name: create-report
+      image: registry.access.redhat.com/ubi8/ubi-minimal:latest
+      script: |
+        #!/bin/sh
+        echo "Creating daily summary report..."
+        echo "===== DAILY SUMMARY REPORT =====" > $(workspaces.output.path)/summary.txt
+        echo "" >> $(workspaces.output.path)/summary.txt
+        echo "QUOTE OF THE DAY:" >> $(workspaces.output.path)/summary.txt
+        echo "$(params.quote)" >> $(workspaces.output.path)/summary.txt
+        echo "" >> $(workspaces.output.path)/summary.txt
+        echo "WEATHER UPDATE:" >> $(workspaces.output.path)/summary.txt
+        echo "$(params.weather)" >> $(workspaces.output.path)/summary.txt
+        echo "Whatever the weather may be, always be motivated :)" >> $(workspaces.output.path)/summary.txt
+        echo "===== END OF REPORT =====" >> $(workspaces.output.path)/summary.txt
+        
+        cat $(workspaces.output.path)/summary.txt

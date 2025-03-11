@@ -1,0 +1,23 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: daily-info-pipeline
+spec:
+  tasks:
+    - name: get-quote
+      taskRef:
+        name: motivational-quote-task
+    - name: fetch-weather
+      taskRef:
+        name: fetch-weather-task
+    - name: summary-task
+      taskRef:
+        name: create-summary
+      runAfter:
+        - get-quote
+        - fetch-weather
+      params:
+        - name: quote
+          value: $(tasks.get-quote.results.quote)
+        - name: weather
+          value: $(tasks.fetch-weather.results.weather)
