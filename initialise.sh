@@ -13,7 +13,6 @@ mkdir -p 4_Milestones/Descriptions
 
 # Create README.md with sections in the root directory
 cat <<EOL > README.md
-# GalacticAcademy
 
 ## 1. Journey 🌌
 This directory is your personal log of the learning journey. Here, you will document your experiences, thoughts, and reflections as you progress through your missions. It's a space for introspection and storytelling.
