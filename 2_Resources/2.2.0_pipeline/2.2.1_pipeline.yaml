@@ -3,6 +3,8 @@ kind: Pipeline
 metadata:
   name: daily-info-pipeline
 spec:
+  workspaces:
+    - name: pipeline-output
   tasks:
     - name: get-quote
       taskRef:
@@ -21,3 +23,6 @@ spec:
           value: $(tasks.get-quote.results.quote)
         - name: weather
           value: $(tasks.fetch-weather.results.weather)
+      workspaces:
+        - name: output
+          workspace: pipeline-output
